@@ -15,22 +15,10 @@
             payloadTypeaccountSid: {
                 value: "str"
             },
-            authToken: {
-                value: ""
-            },
-            payloadTypeauthToken: {
-                value: "str"
-            },
             from: {
                 value: ""
             },
             payloadTypefrom: {
-                value: "str"
-            },
-            accessKey: {
-                value: ""
-            },
-            payloadTypeaccessKey: {
                 value: "str"
             },
             originator: {
@@ -45,12 +33,6 @@
             payloadTypeauthId: {
                 value: "str"
             },
-            auth_token: {
-                value: ""
-            },
-            payloadTypeauth_token: {
-                value: "str"
-            },
             phone: {
                 value: ""
             },
@@ -61,7 +43,11 @@
                 value: "twilio"
             },
         },
-        credentials: {},
+        credentials: {
+            accessToken: {
+                type: String
+            },
+        },
         inputs: 1,
         outputs: 1,
         icon: "fa-file-code-o.png",
@@ -89,24 +75,6 @@
             })
             $("#node-config-input-accountSid").typedInput("type", this.payloadTypeaccountSid)
 
-            if (this.payloadTypeauthToken === null) {
-                if (this.authToken === "") {
-                    this.payloadTypeauthToken = "date"
-                } else {
-                    this.payloadTypeauthToken = "str"
-                }
-            } else if (this.payloadTypeauthToken === 'string' || this.payloadTypeauthToken === 'none') {
-                this.payloadTypeauthToken = "str"
-            }
-
-            $("#node-config-input-payloadTypeauthToken").val(this.payloadTypeauthToken)
-            $("#node-config-input-authToken").typedInput({
-                default: "str",
-                typeField: $("#node-config-input-payloadTypeauthToken"),
-                types: ["msg", "str", "flow", "global"]
-            })
-            $("#node-config-input-authToken").typedInput("type", this.payloadTypeauthToken)
-
             if (this.payloadTypefrom === null) {
                 if (this.from === "") {
                     this.payloadTypefrom = "date"
@@ -124,24 +92,6 @@
                 types: ["msg", "str", "flow", "global"]
             })
             $("#node-config-input-from").typedInput("type", this.payloadTypefrom)
-
-            if (this.payloadTypeaccessKey === null) {
-                if (this.accessKey === "") {
-                    this.payloadTypeaccessKey = "date"
-                } else {
-                    this.payloadTypeaccessKey = "str"
-                }
-            } else if (this.payloadTypeaccessKey === 'string' || this.payloadTypeaccessKey === 'none') {
-                this.payloadTypeaccessKey = "str"
-            }
-
-            $("#node-config-input-payloadTypeaccessKey").val(this.payloadTypeaccessKey)
-            $("#node-config-input-accessKey").typedInput({
-                default: "str",
-                typeField: $("#node-config-input-payloadTypeaccessKey"),
-                types: ["msg", "str", "flow", "global"]
-            })
-            $("#node-config-input-accessKey").typedInput("type", this.payloadTypeaccessKey)
 
             if (this.payloadTypeoriginator === null) {
                 if (this.originator === "") {
@@ -178,24 +128,6 @@
                 types: ["msg", "str", "flow", "global"]
             })
             $("#node-config-input-authId").typedInput("type", this.payloadTypeauthId)
-
-            if (this.payloadTypeauth_token === null) {
-                if (this.auth_token === "") {
-                    this.payloadTypeauth_token = "date"
-                } else {
-                    this.payloadTypeauth_token = "str"
-                }
-            } else if (this.payloadTypeauth_token === 'string' || this.payloadTypeauth_token === 'none') {
-                this.payloadTypeauth_token = "str"
-            }
-
-            $("#node-config-input-payloadTypeauth_token").val(this.payloadTypeauth_token)
-            $("#node-config-input-auth_token").typedInput({
-                default: "str",
-                typeField: $("#node-config-input-payloadTypeauth_token"),
-                types: ["msg", "str", "flow", "global"]
-            })
-            $("#node-config-input-auth_token").typedInput("type", this.payloadTypeauth_token)
 
             if (this.payloadTypephone === null) {
                 if (this.phone === "") {
@@ -239,14 +171,12 @@
 
 
 
-
-
+            $(node - config - input - accessToken).val(
+                $(node - config - input - accessToken).val().trim()
+            )
 
         },
         oneditcancel: function() {
-
-
-
 
 
 
@@ -257,14 +187,8 @@
 
 
 
-
-
-
         },
         oneditresize: function() {
-
-
-
 
 
 
@@ -275,14 +199,8 @@
 
 
 
-
-
-
         },
         onpaletteremove: function() {
-
-
-
 
 
 
@@ -308,11 +226,6 @@
             <input type="hidden" id="node-config-input-payloadTypeaccountSid">
         </div>
         <div class="form-row">
-            <label for="node-config-input-authToken">authToken</label>
-            <input type="text" id="node-config-input-authToken"></input>
-            <input type="hidden" id="node-config-input-payloadTypeauthToken">
-        </div>
-        <div class="form-row">
             <label for="node-config-input-from">from</label>
             <input type="text" id="node-config-input-from"></input>
             <input type="hidden" id="node-config-input-payloadTypefrom">
@@ -320,11 +233,6 @@
     </div>
 
     <div id="fieldset-messageBird" style="padding-left: 10px;">
-        <div class="form-row">
-            <label for="node-config-input-accessKey">accessKey</label>
-            <input type="text" id="node-config-input-accessKey"></input>
-            <input type="hidden" id="node-config-input-payloadTypeaccessKey">
-        </div>
         <div class="form-row">
             <label for="node-config-input-originator">originator</label>
             <input type="text" id="node-config-input-originator"></input>
@@ -339,15 +247,14 @@
             <input type="hidden" id="node-config-input-payloadTypeauthId">
         </div>
         <div class="form-row">
-            <label for="node-config-input-auth_token">auth_token</label>
-            <input type="text" id="node-config-input-auth_token"></input>
-            <input type="hidden" id="node-config-input-payloadTypeauth_token">
-        </div>
-        <div class="form-row">
             <label for="node-config-input-phone">phone</label>
             <input type="text" id="node-config-input-phone"></input>
             <input type="hidden" id="node-config-input-payloadTypephone">
         </div>
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-accessToken">Access Token / API Key</label>
+        <input type="password" id="node-config-input-accessToken"></input>
     </div>
 </script>
 

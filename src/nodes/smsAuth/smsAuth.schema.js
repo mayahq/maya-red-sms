@@ -23,11 +23,6 @@ class SmsAuth extends Node {
               defaultVal: "",
               allowedTypes: ["msg", "str", "flow", "global"],
             }),
-            authToken: new fields.Typed({
-              type: "str",
-              defaultVal: "",
-              allowedTypes: ["msg", "str", "flow", "global"],
-            }),
             from: new fields.Typed({
               type: "str",
               defaultVal: "",
@@ -35,11 +30,6 @@ class SmsAuth extends Node {
             }),
           },
           messageBird: {
-            accessKey: new fields.Typed({
-              type: "str",
-              defaultVal: "",
-              allowedTypes: ["msg", "str", "flow", "global"],
-            }),
             originator: new fields.Typed({
               type: "str",
               defaultVal: "",
@@ -48,11 +38,6 @@ class SmsAuth extends Node {
           },
           plivo: {
             authId: new fields.Typed({
-              type: "str",
-              defaultVal: "",
-              allowedTypes: ["msg", "str", "flow", "global"],
-            }),
-            auth_token: new fields.Typed({
               type: "str",
               defaultVal: "",
               allowedTypes: ["msg", "str", "flow", "global"],
@@ -67,7 +52,14 @@ class SmsAuth extends Node {
       }),
     },
     redOpts: {
-      credentials: {},
+      credentials: {
+        accessToken: new fields.Credential({
+          displayName: 'Access Token / API Key',
+          trim: true,
+          password: true,
+          forConfig: true
+        })
+      },
     },
   });
 

@@ -36,12 +36,15 @@ class SendSms extends Node {
     // Handle the message. The returned value will
     // be sent as the message to any further nodes.
     this.setStatus("PROGRESS", "Sending SMS");
+    const apiKey = this.credentials?.SmsAuth?.accessToken
+
     const _this = this;
     const props = vals.SmsAuth;
     console.log(props.service,props.originator,vals.to,vals.message);
     if (props.service == "twilio") {
       try {
-        const client = require("twilio")(props.accountSid, props.authToken);
+        // const client = require("twilio")(props.accountSid, props.authToken);
+        const client = require("twilio")(props.accountSid, apiKey);
         client.messages
           .create({
             body: vals.message,
@@ -68,7 +71,8 @@ class SendSms extends Node {
       }
     } else if (props.service == "messageBird") {
       try {
-        const messageBird = require("messagebird")(props.accessKey);
+        // const messageBird = require("messagebird")(props.accessKey);
+        const messageBird = require("messagebird")(apiKey);
         messageBird.messages.create(
           {
             originator: props.originator,
@@ -96,7 +100,8 @@ class SendSms extends Node {
     } else if (props.service == "plivo") {
       try {
         const plivo = require("plivo");
-        const client = new plivo.Client(props.authId, props.auth_token);
+        // const client = new plivo.Client(props.authId, props.auth_token);
+        const client = new plivo.Client(props.authId, apiKey);
         client.messages
           .create({src: props.phone, dst: vals.to, text: vals.message})
           .then((response) => {
