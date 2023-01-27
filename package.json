@@ -39,7 +39,7 @@
     }
   },
   "dependencies": {
-    "@mayahq/module-sdk": "^2.3.2",
+    "@mayahq/module-sdk": "^2.3.6",
     "messagebird": "^3.8.1",
     "plivo": "^4.34.0",
     "twilio": "^3.81.0"
